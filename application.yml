@@ -1,6 +1,6 @@
 # CẤU HÌNH CHO SERVER VÀ PORT
 server: # REST and WS server
-  port: 8080 # 🌟 ĐÃ CHỈNH SỬA: Cổng BẮT BUỘC cho Render Web Service Free/Starter
+  port: 80 # 🌟 ĐÃ CHỈNH SỬA: Cổng BẮT BUỘC cho Render Web Service Free/Starter
   address: 0.0.0.0
   http2:
     enabled: false
