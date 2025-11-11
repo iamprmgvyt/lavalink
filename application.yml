@@ -2,7 +2,7 @@
 # I. CẤU HÌNH SERVER VÀ PORT (BẮT BUỘC CHO RENDER)
 # ----------------------------------------------------------------------
 server:
-  port: 80 # 🌟 Đã sửa: Cổng bắt buộc cho Render
+  port: 80 # 🌟 Cổng bắt buộc cho Render
   address: 0.0.0.0
   http2:
     enabled: false
@@ -10,46 +10,31 @@ server:
 # ----------------------------------------------------------------------
 # II. KHAI BÁO CÁC PLUGIN BÊN NGOÀI
 # ----------------------------------------------------------------------
-# Lưu ý: Các plugin này phải có trong thư mục plugins/ hoặc được tải qua Maven/Gradle
 plugins:
-  # 1. Plugin YouTube chính thức (Quan trọng nhất)
-  - dependency: "dev.lavalink.youtube:youtube-source:1.4.0" 
-
-  # 2. Plugin Spotify (Cần Client ID/Secret)
-  - dependency: "dev.lavalink.spotify:spotify-source:1.4.0"
-
-  # 3. Plugin Apple Music (Tùy chọn)
-  - dependency: "dev.lavalink.apple:apple-music-source:1.4.0"
-  
+  # ⚠️ CHỈ SỬ DỤNG LAVASRC (LAVA MEDIA SOURCE)
+  - dependency: "dev.arbjerg.lavalink.plugins.lavasrc.LavaSrc" 
+    
 # ----------------------------------------------------------------------
 # III. CẤU HÌNH LAVALINK CHÍNH (lavalink:)
 # ----------------------------------------------------------------------
 lavalink:
   
-  # A. CẤU HÌNH CHO CÁC PLUGIN ĐÃ KHAI BÁO Ở TRÊN
+  # A. CẤU HÌNH CHO LAVASRC PLUGIN
   plugins:
-    # Cấu hình Plugin YouTube Source: Cho phép tìm kiếm
-    youtube:
-      allowSearch: true 
-    
-    # Cấu hình Plugin Spotify Source: Sử dụng thông tin đăng nhập của bạn
-    spotify:
-      clientId: "85aab1d51a174aad9eed6d7989f530e6" # Thay bằng Client ID thật
-      clientSecret: "b2ad05aa725e434c88776a1be8eab6c2" # Thay bằng Client Secret thật
-      countryCode: "VN"
+    lavasrc:
+      spotify:
+        clientId: "85aab1d51a174aad9eed6d7989f530e6" # Thay bằng Client ID thật
+        clientSecret: "b2ad05aa725e434c88776a1be8eab6c2" # Thay bằng Client Secret thật
+        countryCode: "VN"
 
-    # Cấu hình Plugin Apple Music Source (nếu cần)
-    # applemusic:
-    #   mediaAPIToken: "⚠️ APPLE_MUSIC_DEVELOPER_TOKEN"
-      
   # B. CẤU HÌNH SERVER CHUNG
   server:
     password: "iamprmgvyt" # Mật khẩu node của bạn
     
-    # Kích hoạt các nguồn tìm kiếm:
+    # ⚠️ CÁC NGUỒN TÌM KIẾM
     sources:
-      # 🌟 ĐÃ SỬA: KÍCH HOẠT LẠI NGUỒN YOUTUBE MẶC DỤ ĐÃ DÙNG PLUGIN
-      youtube: true 
+      # TẮT NGUỒN YOUTUBE MẶC ĐỊNH ĐỂ LAVASRC XỬ LÝ
+      youtube: false 
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -58,11 +43,7 @@ lavalink:
       http: true 
       local: false
 
-    # Cấu hình tìm kiếm mặc định (Sử dụng các Plugin đã bật):
-    youtubeSearchEnabled: true
-    soundcloudSearchEnabled: true
-    
-    # Các thiết lập khác (giữ nguyên):
+    # CÁC THIẾT LẬP KHÁC (GIỮ NGUYÊN)
     filters:
       volume: true
       equalizer: true
@@ -83,6 +64,8 @@ lavalink:
     useSeekGhosting: true
     youtubePlaylistLoadLimit: 6
     playerUpdateInterval: 5
+    youtubeSearchEnabled: false # Lavalink v4.x tự động quản lý qua LavaSrc
+    soundcloudSearchEnabled: true
     gc-warnings: true
     timeouts:
       connectTimeoutMs: 3000
