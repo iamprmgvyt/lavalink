@@ -15,7 +15,7 @@ lavalink:
         frameBufferDurationMs: 5000
         gcWarnings: true
         opusEncodingQuality: 10
-        password: iamprmgvyt
+        password: glace
         playerUpdateInterval: 5
         resamplingQuality: HIGH
         soundcloudSearchEnabled: true
